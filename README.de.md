@@ -1,0 +1,206 @@
+# obMenu
+
+Eine kleine Formatierungsleiste fuer Menschen, die in Markdown leben.
+
+[English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md)
+
+obMenu ist ein Clean-Room-Plugin mit einer Markdown-Werkzeugleiste, inspiriert von der Produktidee hinter cMenu. Es bringt die haeufig genutzten Aktionen direkt neben den Editor: Ueberschriften, Checkboxen, Callouts, Links, Hervorhebungen, Code, Listen, Fett, Kursiv und ein paar leise Helfer.
+
+Du kannst die Leiste unten anheften, neben der Auswahl anzeigen oder an eine bequeme Stelle ziehen. Weniger Wege zur command palette, weniger gemerkte Tastenkombinationen, mehr Schreiben.
+
+> Status: bereit fuer GitHub-Releases. Einreichung fuer community plugins: in Arbeit.
+
+![Screenshot der obMenu-Leiste](assets/readme/Screenshot%202026-06-12%20at%2015.28.52.png)
+
+## Was jetzt funktioniert
+
+### Markdown-Aktionen
+
+Die eingebaute Befehlsliste enthaelt:
+
+- Fett
+- Kursiv
+- Durchgestrichen
+- Unterstrichen
+- Hervorheben
+- Formatierung entfernen
+- Inline-Code
+- Codeblock
+- Zitat
+- Callout
+- Checkbox
+- Aufzaehlung
+- Nummerierte Liste
+- Markdown-Link
+- Wikilink
+- Ueberschriften H1-H6
+
+Die Standardleiste zeigt nicht alle Befehle gleichzeitig. Sie startet mit einem nuetzlichen Schreibset; der Rest bleibt ueber Presets oder die Einstellungsseite verfuegbar.
+
+### Ueberschriften
+
+Die Standardleiste zeigt H1, H2, H3 und H4 als einzelne Buttons. H5, H6 und das gruppierte Ueberschriftenmenue sind weiterhin verfuegbar, wenn du eine andere Einrichtung bevorzugst.
+
+### Position der Leiste
+
+obMenu hat vier Positionsmodi:
+
+- `fixed`: die Leiste unten im Workspace halten.
+- `selection`: die Leiste nahe am markierten Text anzeigen.
+- `cursor`: die Leiste nahe an aktueller Auswahl oder Cursor platzieren, wenn der Browser ein usable selection rectangle liefert.
+- `manual`: die Leiste am Griff ziehen und die gespeicherte Position behalten.
+
+Selection, cursor und manual bleiben innerhalb des Viewports, auch in kleinen Fenstern.
+
+### Anpassung
+
+Die Leiste kann in den Einstellungen bearbeitet werden:
+
+- Eingebaute Befehle hinzufuegen, die noch nicht in der Leiste sind.
+- Nicht benoetigte Buttons entfernen.
+- Visuelle Trenner zwischen Gruppen einfuegen.
+- Buttons per drag and drop neu sortieren.
+- Buttons mit Pfeilsteuerung neu sortieren, wenn drag and drop unpraktisch ist.
+- Die Leiste auf das Standardset zuruecksetzen.
+
+Trenner sind echte Elemente der Leiste. So wirkt die Leiste wie gruppierte Werkzeuge statt wie eine lange Symbolreihe.
+
+### Presets
+
+Presets sind schnelle Startpunkte:
+
+- `Writer`: das vollstaendige Standardset fuer normales Markdown-Schreiben.
+- `Zettelkasten`: Ueberschriften, Checkboxen, Zitate, Hervorhebungen, Wikilinks und Markdown-Links.
+- `Code notes`: Inline-Code, Codeblocks, Listen, Callouts und Links.
+- `Compact`: eine kuerzere Leiste mit gruppierten Ueberschriften und kompaktem Stil.
+
+Nach der Wahl eines Presets kannst du weiterhin Buttons hinzufuegen, entfernen und sortieren. Presets sperren die Leiste nicht; sie sparen nur den ersten manuellen Aufbau.
+
+### Stile
+
+- `default`: normale Obsidian-Werkzeugleisten-Dichte.
+- `compact`: kleinere Buttons, wenn die Notiz mehr Platz braucht.
+
+Beide Stile verwenden Obsidian theme variables. Dadurch folgt obMenu hellen und dunklen Themes ohne eigenes Farbsystem.
+
+### Bearbeitungsdetails
+
+- Aktionen setzen den Fokus zurueck in den aktiven Markdown-Editor.
+- Leere Inline-Aktionen setzen den Cursor zwischen die eingefuegten Marker.
+- Wenn markierter Text bereits mit derselben Inline-Formatierung umschlossen ist, entfernt ein erneuter Klick die Umfassung.
+- Checkbox-Umschaltung behaelt Einrueckung bei und behandelt leere aktivierte oder deaktivierte task items.
+- Callout wandelt die aktuelle Zeile in `> [!note]` um oder entfernt einen vorhandenen callout marker.
+- Formatierung entfernen loescht haeufige Inline-Umfassungen aus Auswahl oder aktueller Zeile.
+
+### Sichere Einstellungen
+
+Gespeicherte Einstellungen werden beim Laden normalisiert. Wenn alte oder fehlerhafte Daten auftauchen, faellt obMenu auf Standardwerte zurueck, statt die Leiste zu brechen.
+
+### Release-Unterstuetzung
+
+Das Repository enthaelt einen lokalen Release-Build und einen tag-basierten GitHub release workflow. Release-Assets sind `main.js`, `manifest.json` und `styles.css`, mit GitHub artifact attestations.
+
+## Einstellungen
+
+Die Einstellungsseite erlaubt:
+
+- Die Leiste ein- oder ausschalten.
+- Den Positionsmodus waehlen.
+- Den visuellen Stil waehlen.
+- Die manuelle Position zuruecksetzen.
+- Presets anwenden: Writer, Zettelkasten, Code notes und Compact.
+- Eingebaute Buttons hinzufuegen.
+- Visuelle Trenner hinzufuegen.
+- Buttons per drag and drop oder Pfeiltasten sortieren.
+- Buttons entfernen.
+- Elemente der Leiste auf das Standardset zuruecksetzen.
+
+## Installation aus GitHub release
+
+Lade diese Dateien aus dem neuesten GitHub release herunter:
+
+```text
+main.js
+manifest.json
+styles.css
+```
+
+Lege sie in deinem Vault hier ab:
+
+```text
+.obsidian/plugins/obmenu
+```
+
+Aktiviere danach `obMenu` in den Einstellungen fuer community plugins.
+
+## Lokal bauen
+
+Baue den Release-Ordner:
+
+```bash
+npm run build:dist
+```
+
+Kopiere diesen Ordner:
+
+```text
+dist/obmenu
+```
+
+in deinen Vault:
+
+```text
+.obsidian/plugins/obmenu
+```
+
+Aktiviere danach `obMenu` in den Einstellungen fuer community plugins.
+
+## Entwicklung
+
+Abhaengigkeiten installieren:
+
+```bash
+npm install
+```
+
+Tests ausfuehren:
+
+```bash
+npm run test
+```
+
+TypeScript pruefen:
+
+```bash
+npm run typecheck
+```
+
+Root-Plugin-Bundle bauen:
+
+```bash
+npm run build
+```
+
+Release-Ordner bauen:
+
+```bash
+npm run build:dist
+```
+
+Vollstaendigen pre-release check ausfuehren:
+
+```bash
+npm run check
+```
+
+## Datenschutz
+
+obMenu laeuft lokal in Obsidian. Es sendet keine Notizen, Auswahlen, Einstellungen oder Telemetrie.
+
+## Inspiration
+
+obMenu ist von cMenu inspiriert, einem frueheren Formatierungsleisten-Plugin fuer Obsidian. Dieses Projekt kopiert keine cMenu-Quelldateien.
+
+## Lizenz
+
+MIT License. Copyright (c) 2026 Michael Makarov.

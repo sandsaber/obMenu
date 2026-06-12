@@ -45,6 +45,28 @@ export function toggleCheckboxLine(line: string): string {
   return `${indentation}- [ ] ${text}`;
 }
 
+export function applyCalloutToLine(line: string): string {
+  const calloutMatch = line.match(/^>\s+\[![^\]]+\](?:\s+(.*))?$/i);
+
+  if (calloutMatch) {
+    return calloutMatch[1] ?? "";
+  }
+
+  return line.length > 0 ? `> [!note] ${line}` : "> [!note]";
+}
+
+export function clearInlineFormatting(text: string): string {
+  return text
+    .replace(/\*\*([^*\n]+?)\*\*/g, "$1")
+    .replace(/__([^_\n]+?)__/g, "$1")
+    .replace(/~~([^~\n]+?)~~/g, "$1")
+    .replace(/==([^=\n]+?)==/g, "$1")
+    .replace(/`([^`\n]+?)`/g, "$1")
+    .replace(/<u>([\s\S]*?)<\/u>/g, "$1")
+    .replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, "$1$2")
+    .replace(/(^|[^_])_([^_\n]+?)_(?!_)/g, "$1$2");
+}
+
 export function applyInlineCommand(
   editor: Editor,
   prefix: string,
@@ -76,4 +98,25 @@ export function applyCheckboxCommand(editor: Editor): void {
   const line = editor.getLine(cursor.line);
 
   editor.setLine(cursor.line, toggleCheckboxLine(line));
+}
+
+export function applyCalloutCommand(editor: Editor): void {
+  const cursor = editor.getCursor();
+  const line = editor.getLine(cursor.line);
+
+  editor.setLine(cursor.line, applyCalloutToLine(line));
+}
+
+export function applyClearFormattingCommand(editor: Editor): void {
+  const selection = editor.getSelection();
+
+  if (selection.length > 0) {
+    editor.replaceSelection(clearInlineFormatting(selection));
+    return;
+  }
+
+  const cursor = editor.getCursor();
+  const line = editor.getLine(cursor.line);
+
+  editor.setLine(cursor.line, clearInlineFormatting(line));
 }

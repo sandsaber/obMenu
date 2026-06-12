@@ -6,7 +6,9 @@ import {
   type Editor,
 } from "obsidian";
 import {
+  applyCalloutCommand,
   applyCheckboxCommand,
+  applyClearFormattingCommand,
   applyHeadingCommand,
   applyInlineCommand,
 } from "./commands/markdownCommands";
@@ -14,7 +16,7 @@ import { normalizeSettings } from "./settings";
 import { ObMenuSettingTab } from "./settingsTab";
 import type { ObMenuSettings, ToolbarItem } from "./types";
 import { ToolbarEvents } from "./toolbar/events";
-import { positionNearRect } from "./toolbar/positioning";
+import { clampPosition, positionNearRect } from "./toolbar/positioning";
 import { ToolbarController } from "./toolbar/toolbar";
 
 interface ObsidianCommandApi {
@@ -54,6 +56,10 @@ export default class ObMenuPlugin extends Plugin {
         app: this.app,
         settings: this.settings,
         onRunItem: (item, event) => this.runToolbarItem(item, event),
+        onManualMove: (position) => {
+          this.settings.manualPosition = position;
+          void this.saveSettings();
+        },
       });
       this.toolbar.mount(document.body);
 
@@ -119,6 +125,11 @@ export default class ObMenuPlugin extends Plugin {
       editorCallback: (editor) => applyInlineCommand(editor, "=="),
     });
     this.addCommand({
+      id: "clear-formatting",
+      name: "Clear formatting",
+      editorCallback: (editor) => applyClearFormattingCommand(editor),
+    });
+    this.addCommand({
       id: "toggle-inline-code",
       name: "Toggle inline code",
       editorCallback: (editor) => applyInlineCommand(editor, "`"),
@@ -127,6 +138,11 @@ export default class ObMenuPlugin extends Plugin {
       id: "toggle-checkbox",
       name: "Toggle checkbox",
       editorCallback: (editor) => applyCheckboxCommand(editor),
+    });
+    this.addCommand({
+      id: "toggle-callout",
+      name: "Toggle callout",
+      editorCallback: (editor) => applyCalloutCommand(editor),
     });
 
     for (const level of [1, 2, 3, 4, 5, 6] as const) {
@@ -141,6 +157,7 @@ export default class ObMenuPlugin extends Plugin {
   private runToolbarItem(item: ToolbarItem, event: MouseEvent): void {
     const editor = this.getEditor();
     if (!editor) return;
+    if (item.type === "separator" || !item.commandId) return;
 
     if (item.type === "obsidian") {
       this.commandApi?.executeCommandById(item.commandId);
@@ -176,7 +193,9 @@ export default class ObMenuPlugin extends Plugin {
       "inline-code": () => applyInlineCommand(editor, "`"),
       "code-block": () => applyInlineCommand(editor, "\n```\n", "\n```\n"),
       highlight: () => applyInlineCommand(editor, "=="),
+      "clear-formatting": () => applyClearFormattingCommand(editor),
       checkbox: () => applyCheckboxCommand(editor),
+      callout: () => applyCalloutCommand(editor),
       "heading-1": () => applyHeadingCommand(editor, 1),
       "heading-2": () => applyHeadingCommand(editor, 2),
       "heading-3": () => applyHeadingCommand(editor, 3),
@@ -212,6 +231,29 @@ export default class ObMenuPlugin extends Plugin {
 
   private updateToolbarPosition(editor: Editor): void {
     if (!this.toolbar) return;
+
+    if (this.settings.positionMode === "manual") {
+      const toolbarSize = this.toolbar.getSize();
+      if (!toolbarSize) {
+        this.toolbar.clearPosition();
+        return;
+      }
+
+      const position = clampPosition(
+        this.settings.manualPosition ?? {
+          left: (window.innerWidth - toolbarSize.width) / 2,
+          top: window.innerHeight - toolbarSize.height - 16,
+        },
+        toolbarSize,
+        {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        },
+      );
+
+      this.toolbar.setPosition(position.left, position.top);
+      return;
+    }
 
     if (this.settings.positionMode === "fixed") {
       this.toolbar.clearPosition();

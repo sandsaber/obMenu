@@ -44,10 +44,22 @@ export const BUILTIN_COMMANDS: BuiltInCommandDefinition[] = [
     group: "blocks",
   },
   {
+    id: "callout",
+    name: "Callout",
+    icon: "message-square-quote",
+    group: "blocks",
+  },
+  {
     id: "highlight",
     name: "Highlight",
     icon: "highlighter",
     group: "formatting",
+  },
+  {
+    id: "clear-formatting",
+    name: "Clear Formatting",
+    icon: "remove-formatting",
+    group: "utility",
   },
   {
     id: "checkbox",

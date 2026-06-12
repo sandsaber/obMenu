@@ -1,0 +1,128 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '[0-9]*.[0-9]*.[0-9]*'
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+  artifact-metadata: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Runtime dependency audit
+        run: npm audit --omit=dev
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Build release bundle
+        run: npm run build:dist
+
+      - name: Verify release version
+        run: |
+          node -e '
+          const fs = require("fs");
+          const tag = process.env.GITHUB_REF_NAME;
+          const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+          const manifest = JSON.parse(fs.readFileSync("dist/obmenu/manifest.json", "utf8"));
+          if (pkg.version !== tag || manifest.version !== tag) {
+            console.error("Release tag " + tag + " must match package.json (" + pkg.version + ") and manifest.json (" + manifest.version + ").");
+            process.exit(1);
+          }
+          '
+
+      - name: Verify release assets
+        run: |
+          test -s dist/obmenu/main.js
+          test -s dist/obmenu/manifest.json
+          test -s dist/obmenu/styles.css
+
+      - name: Attest release assets
+        uses: actions/attest@v4
+        with:
+          subject-path: |
+            dist/obmenu/main.js
+            dist/obmenu/manifest.json
+            dist/obmenu/styles.css
+
+      - name: Generate release notes
+        run: |
+          set -euo pipefail
+
+          tag="${GITHUB_REF_NAME}"
+          current_commit="$(git rev-list -n 1 "${tag}")"
+          previous_tag="$(
+            git tag --merged "${current_commit}" --sort=-v:refname \
+              | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
+              | grep -v "^${tag}$" \
+              | head -n 1 || true
+          )"
+
+          {
+            echo "obMenu ${tag}"
+            echo
+
+            if [ -n "${previous_tag}" ]; then
+              compare_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/compare/${previous_tag}...${tag}"
+              echo "Changes since [${previous_tag}](${compare_url}):"
+              echo
+              git log --no-merges --pretty=format:'- %s (`%h`)' "${previous_tag}..${tag}"
+            else
+              echo "Changes in this release:"
+              echo
+              git log --no-merges --pretty=format:'- %s (`%h`)' --max-count=20 "${tag}"
+            fi
+          } > RELEASE_NOTES.md
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          title="obMenu ${tag}"
+
+          if gh release view "${tag}" >/dev/null 2>&1; then
+            gh release edit "${tag}" \
+              --title "${title}" \
+              --target "${GITHUB_SHA}" \
+              --notes-file RELEASE_NOTES.md
+            gh release upload "${tag}" \
+              dist/obmenu/main.js \
+              dist/obmenu/manifest.json \
+              dist/obmenu/styles.css \
+              --clobber
+          else
+            gh release create "${tag}" \
+              dist/obmenu/main.js \
+              dist/obmenu/manifest.json \
+              dist/obmenu/styles.css \
+              --title "${title}" \
+              --target "${GITHUB_SHA}" \
+              --notes-file RELEASE_NOTES.md \
+              --verify-tag
+          fi

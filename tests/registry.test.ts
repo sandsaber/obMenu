@@ -20,7 +20,9 @@ describe("BUILTIN_COMMANDS", () => {
       "inline-code",
       "code-block",
       "blockquote",
+      "callout",
       "highlight",
+      "clear-formatting",
       "checkbox",
       "bullet-list",
       "numbered-list",
@@ -38,7 +40,13 @@ describe("BUILTIN_COMMANDS", () => {
   });
 
   it("uses only allowed command groups", () => {
-    const allowedGroups = new Set(["formatting", "headings", "blocks", "links"]);
+    const allowedGroups = new Set([
+      "formatting",
+      "headings",
+      "blocks",
+      "links",
+      "utility",
+    ]);
 
     for (const command of BUILTIN_COMMANDS) {
       expect(allowedGroups.has(command.group ?? "")).toBe(true);
@@ -50,6 +58,8 @@ describe("getBuiltInCommand", () => {
   it("returns built-in commands by id", () => {
     expect(getBuiltInCommand("checkbox")?.name).toBe("Checkbox");
     expect(getBuiltInCommand("wikilink")?.name).toBe("Wikilink");
+    expect(getBuiltInCommand("callout")?.icon).toBe("message-square-quote");
+    expect(getBuiltInCommand("clear-formatting")?.icon).toBe("remove-formatting");
   });
 
   it("returns undefined for unknown commands", () => {

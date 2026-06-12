@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import type { Editor } from "obsidian";
 import {
+  applyCalloutToLine,
+  clearInlineFormatting,
   applyInlineCommand,
   applyHeadingToLine,
   toggleCheckboxLine,
@@ -74,6 +76,34 @@ describe("toggleCheckboxLine", () => {
 
   it("removes an empty checked checkbox", () => {
     expect(toggleCheckboxLine("- [x]")).toBe("");
+  });
+});
+
+describe("applyCalloutToLine", () => {
+  it("wraps a plain line in a note callout", () => {
+    expect(applyCalloutToLine("Remember this")).toBe("> [!note] Remember this");
+  });
+
+  it("removes an existing callout marker", () => {
+    expect(applyCalloutToLine("> [!tip] Remember this")).toBe("Remember this");
+  });
+
+  it("keeps empty callouts tidy", () => {
+    expect(applyCalloutToLine("")).toBe("> [!note]");
+  });
+});
+
+describe("clearInlineFormatting", () => {
+  it("removes common inline wrappers from selected Markdown", () => {
+    expect(
+      clearInlineFormatting(
+        "**bold** *italic* ~~gone~~ ==bright== `code` <u>under</u>",
+      ),
+    ).toBe("bold italic gone bright code under");
+  });
+
+  it("leaves plain text alone", () => {
+    expect(clearInlineFormatting("plain text")).toBe("plain text");
   });
 });
 
