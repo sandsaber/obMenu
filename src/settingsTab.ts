@@ -116,7 +116,7 @@ export class MdMenuSettingTab extends PluginSettingTab {
           }
           await this.plugin.saveSettings();
           this.plugin.refreshToolbar();
-          this.display();
+          this.update();
         });
       });
 
@@ -134,7 +134,7 @@ export class MdMenuSettingTab extends PluginSettingTab {
           ];
           await this.plugin.saveSettings();
           this.plugin.refreshToolbar();
-          this.display();
+          this.update();
         });
       });
 
@@ -148,7 +148,7 @@ export class MdMenuSettingTab extends PluginSettingTab {
           );
           await this.plugin.saveSettings();
           this.plugin.refreshToolbar();
-          this.display();
+          this.update();
         });
       });
 
@@ -206,7 +206,7 @@ export class MdMenuSettingTab extends PluginSettingTab {
             ];
             await this.plugin.saveSettings();
             this.plugin.refreshToolbar();
-            this.display();
+            this.update();
           });
       });
   }
@@ -280,7 +280,7 @@ export class MdMenuSettingTab extends PluginSettingTab {
               );
             await this.plugin.saveSettings();
             this.plugin.refreshToolbar();
-            this.display();
+            this.update();
           });
         });
     });
@@ -304,7 +304,7 @@ export class MdMenuSettingTab extends PluginSettingTab {
     this.plugin.settings.toolbarItems = items;
     await this.plugin.saveSettings();
     this.plugin.refreshToolbar();
-    this.display();
+    this.update();
   }
 
   private nextSeparatorId(): string {
