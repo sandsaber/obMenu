@@ -1,6 +1,6 @@
 # obMenu
 
-一个小巧的类 WYSIWYG 格式层，给每天都在 Markdown 里写作的人。
+一个面向 Obsidian 用户的小巧类 WYSIWYG Markdown 格式层。
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 

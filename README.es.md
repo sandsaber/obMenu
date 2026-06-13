@@ -1,6 +1,6 @@
 # obMenu
 
-Una pequeña capa de formato estilo WYSIWYG para quienes viven en Markdown.
+Una pequeña capa de formato Markdown estilo WYSIWYG para usuarios de Obsidian.
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 

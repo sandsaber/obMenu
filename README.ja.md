@@ -1,6 +1,6 @@
 # obMenu
 
-Markdown で書く人のための、小さな WYSIWYG 風の書式レイヤーです。
+Obsidian ユーザーのための、小さな WYSIWYG 風 Markdown 書式レイヤーです。
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 

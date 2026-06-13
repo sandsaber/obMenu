@@ -1,6 +1,6 @@
 # obMenu
 
-Eine kleine WYSIWYG-aehnliche Formatierungsebene fuer Menschen, die in Markdown leben.
+Eine kleine WYSIWYG-aehnliche Markdown-Formatierungsebene fuer Obsidian-Nutzer.
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 

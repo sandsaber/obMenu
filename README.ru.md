@@ -1,6 +1,6 @@
 # obMenu
 
-Небольшой WYSIWYG-подобный слой форматирования для тех, кто живет в Markdown.
+Небольшой WYSIWYG-подобный слой Markdown-форматирования для пользователей Obsidian.
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
