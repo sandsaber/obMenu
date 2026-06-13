@@ -1,12 +1,12 @@
 # obMenu
 
-一条小巧的格式工具栏，给每天都在 Markdown 里写作的人。
+一个小巧的类 WYSIWYG 格式层，给每天都在 Markdown 里写作的人。
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
-obMenu 是一个 clean-room 的 Markdown 工具栏插件，灵感来自 cMenu 的产品想法。它把常用操作放在编辑器旁边：标题、复选框、callout、链接、高亮、代码、列表、粗体、斜体，以及一些安静的小帮手。
+obMenu 是一个 clean-room 的 Markdown 工具栏插件，灵感来自 cMenu 的产品想法。它给编辑器加上一层迷你的类 WYSIWYG 常用格式层，但你的笔记底层仍然是纯 Markdown。标题、复选框、callout、链接、高亮、代码、列表、粗体、斜体，以及一些安静的小帮手，都会留在你正在写的文字旁边。
 
-你可以把它固定在底部，让它跟随选区，也可以拖到顺手的位置。少打开几次 command palette，少记几个快捷键，多一点真正写作的时间。
+你可以把它固定在底部，让它跟随选区，也可以拖到顺手的位置。你仍然是在写 Markdown，只是少打开几次 command palette，少记几个快捷键，并多一点直接操作格式的感觉。
 
 > 状态：已准备好 GitHub release。Community plugin 提交正在进行中。
 

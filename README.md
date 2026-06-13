@@ -1,12 +1,12 @@
 # obMenu
 
-A small formatting bar for people who live in Markdown.
+A tiny WYSIWYG-style formatting layer for people who live in Markdown.
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
-obMenu is a clean-room Obsidian Markdown toolbar inspired by cMenu. It puts the stuff you reach for all the time right next to the editor: headings, checkboxes, callouts, links, highlights, code, lists, bold, italic, and a few quiet helpers.
+obMenu is a clean-room Obsidian Markdown toolbar inspired by cMenu. It gives the editor a mini WYSIWYG-style layer for common formatting while keeping your notes as plain Markdown underneath. Headings, checkboxes, callouts, links, highlights, code, lists, bold, italic, and a few quiet helpers stay right next to the text you are writing.
 
-Keep it pinned at the bottom. Let it follow the selection. Drag it somewhere comfortable and leave it there. Fewer command palette trips, fewer memorized shortcuts, more writing.
+Keep it pinned at the bottom. Let it follow the selection. Drag it somewhere comfortable and leave it there. You still write Markdown, just with fewer command palette trips, fewer memorized shortcuts, and a little more direct manipulation.
 
 > Status: GitHub-release ready. Community plugin submission: in progress.
 

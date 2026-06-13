@@ -1,12 +1,12 @@
 # obMenu
 
-Eine kleine Formatierungsleiste fuer Menschen, die in Markdown leben.
+Eine kleine WYSIWYG-aehnliche Formatierungsebene fuer Menschen, die in Markdown leben.
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
-obMenu ist ein Clean-Room-Plugin mit einer Markdown-Werkzeugleiste, inspiriert von der Produktidee hinter cMenu. Es bringt die haeufig genutzten Aktionen direkt neben den Editor: Ueberschriften, Checkboxen, Callouts, Links, Hervorhebungen, Code, Listen, Fett, Kursiv und ein paar leise Helfer.
+obMenu ist ein Clean-Room-Plugin mit einer Markdown-Werkzeugleiste, inspiriert von der Produktidee hinter cMenu. Es gibt dem Editor eine kleine WYSIWYG-aehnliche Ebene fuer haeufige Formatierungen, waehrend deine Notizen darunter reines Markdown bleiben. Ueberschriften, Checkboxen, Callouts, Links, Hervorhebungen, Code, Listen, Fett, Kursiv und ein paar leise Helfer bleiben direkt neben dem Text, den du schreibst.
 
-Du kannst die Leiste unten anheften, neben der Auswahl anzeigen oder an eine bequeme Stelle ziehen. Weniger Wege zur command palette, weniger gemerkte Tastenkombinationen, mehr Schreiben.
+Du kannst die Leiste unten anheften, neben der Auswahl anzeigen oder an eine bequeme Stelle ziehen. Du schreibst weiterhin Markdown, nur mit weniger Wegen zur command palette, weniger gemerkten Tastenkombinationen und etwas direkterer Formatierung.
 
 > Status: bereit fuer GitHub-Releases. Einreichung fuer community plugins: in Arbeit.
 

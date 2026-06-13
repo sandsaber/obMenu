@@ -1,12 +1,12 @@
 # obMenu
 
-Markdown で書く人のための、小さな書式ツールバーです。
+Markdown で書く人のための、小さな WYSIWYG 風の書式レイヤーです。
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
-obMenu は、cMenu のプロダクトアイデアに着想を得た clean-room の Markdown ツールバープラグインです。見出し、チェックボックス、callout、リンク、ハイライト、コード、リスト、太字、斜体など、よく使う操作をエディタのすぐ近くに置きます。
+obMenu は、cMenu のプロダクトアイデアに着想を得た clean-room の Markdown ツールバープラグインです。よく使う書式操作のための小さな WYSIWYG 風レイヤーをエディタに加えつつ、ノート本体は plain Markdown のまま保ちます。見出し、チェックボックス、callout、リンク、ハイライト、コード、リスト、太字、斜体などを、書いているテキストのすぐ近くに置きます。
 
-下部に固定することも、選択範囲の近くに表示することも、使いやすい場所へドラッグして置いておくこともできます。command palette を開く回数を減らし、覚えるショートカットを減らし、書く時間を増やします。
+下部に固定することも、選択範囲の近くに表示することも、使いやすい場所へドラッグして置いておくこともできます。Markdown を書く体験はそのままに、command palette を開く回数や覚えるショートカットを減らし、少しだけ直接操作に近い感覚で書式を扱えます。
 
 > 状態：GitHub release の準備済み。Community plugin への提出は進行中です。
 

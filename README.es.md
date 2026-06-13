@@ -1,12 +1,12 @@
 # obMenu
 
-Una barra pequeña de formato para quienes viven en Markdown.
+Una pequeña capa de formato estilo WYSIWYG para quienes viven en Markdown.
 
 [English](README.md) | [Русский](README.ru.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
-obMenu es un plugin clean-room con una barra de herramientas Markdown inspirada en la idea de cMenu. Pone las acciones que usas todo el tiempo junto al editor: encabezados, casillas, callouts, enlaces, resaltado, código, listas, negrita, cursiva y algunas ayudas discretas.
+obMenu es un plugin clean-room con una barra de herramientas Markdown inspirada en la idea de cMenu. Añade al editor una mini capa estilo WYSIWYG para el formato común, pero mantiene tus notas como Markdown plano por debajo. Encabezados, casillas, callouts, enlaces, resaltado, código, listas, negrita, cursiva y algunas ayudas discretas quedan junto al texto que estás escribiendo.
 
-Puedes fijarla abajo, mostrarla cerca de la selección o arrastrarla a una posición cómoda. Menos viajes a la command palette, menos atajos memorizados, más escritura.
+Puedes fijarla abajo, mostrarla cerca de la selección o arrastrarla a una posición cómoda. Sigues escribiendo Markdown, solo con menos viajes a la command palette, menos atajos memorizados y un poco más de manipulación directa.
 
 > Estado: listo para releases de GitHub. Envío al catálogo de community plugins: en progreso.
 
